@@ -145,19 +145,17 @@ jobs:
           DRY_RUN: ${{ inputs.dryRun }}
         # language="shell script"
         run: |
-          mkdir /tmp/GOPROXY
+          mkdir -p /tmp/GOPROXY
           
           # todo vlla почему maven-bulk-release-cli выкачивается из репозитория qubership-core-infra?
           cliVersion="1.3.0-SNAPSHOT"     
           
-          mvn \
-            org.apache.maven.plugins:maven-dependency-plugin:3.8.1:copy \
+          mvn org.apache.maven.plugins:maven-dependency-plugin:3.8.1:copy \
             -Dartifact=org.qubership.cloud:go-bulk-release-cli:${cliVersion}:jar:jar-with-dependencies \
             -DremoteRepositories=github::default::https://maven.pkg.github.com/netcracker/qubership-core-bulk-release \
             -DoutputDirectory=. \
-            -DoverWriteSnapshots=true \
-            -Dmdep.stripVersion=true \
-            -Dtransitive=false
+            -Dmdep.overWriteSnapshots=true \
+            -Dmdep.stripVersion=true
           
 #          url="https://maven.pkg.github.com/netcracker/qubership-core-bulk-release/org/qubership/cloud/go-bulk-release-cli/1.3.0-SNAPSHOT/go-bulk-release-cli-1.3.0-20250814.071839-3-jar-with-dependencies.jar"
 #          curl --fail -L -o "go-bulk-release-cli.jar" -H "Authorization: Bearer ${MAVEN_TOKEN}" "${url}"
