@@ -43,7 +43,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      MAVEN_USER: "x-access-token"
+      MAVEN_USER: "TaurMorchant"
       MAVEN_TOKEN: ${{ secrets.MAVEN_RELEASE_DEV_TOKEN }}
       MAVEN_GPG_PASSPHRASE: ${{ secrets.maven-gpg-passphrase }}
     outputs:
