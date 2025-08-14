@@ -141,11 +141,16 @@ jobs:
         run: |
           CLI_VERSION="1.3.0-SNAPSHOT"
           
-          mvn -B -U org.apache.maven.plugins:maven-dependency-plugin:3.6.0:copy \
+          mvn -B -U org.apache.maven.plugins:maven-dependency-plugin:3.6.1:get \
+            -Dartifact=org.qubership.cloud:go-bulk-release-cli:${CLI_VERSION}:jar:jar-with-dependencies \
+            -DrepoUrl=https://maven.pkg.github.com/netcracker/qubership-core-bulk-release \
+            -Dtransitive=false
+          
+          mvn -B org.apache.maven.plugins:maven-dependency-plugin:3.6.1:copy \
             -Dartifact=org.qubership.cloud:go-bulk-release-cli:${CLI_VERSION}:jar:jar-with-dependencies \
             -DoutputDirectory=. \
-            -Dtransitive=false \
-            -DremoteRepositories=github::default::https://maven.pkg.github.com/netcracker/qubership-core-bulk-release
+            -DoverWriteIfNewer=true \
+            -Dtransitive=false
           
           mv go-bulk-release-cli-*.jar go-bulk-release-cli.jar
 
