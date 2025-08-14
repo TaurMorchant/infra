@@ -149,7 +149,7 @@ jobs:
           cliVersion="1.2.4-SNAPSHOT"         
           
           url="https://maven.pkg.github.com/netcracker/qubership-core-bulk-release/org/qubership/cloud/go-bulk-release-cli/1.2.4-SNAPSHOT/go-bulk-release-cli-1.2.4-20250813.122504-1-jar-with-dependencies.jar"
-          curl -L -o "go-bulk-release-cli.jar" -H "Authorization: Bearer ${MAVEN_TOKEN}" "${url}"
+          curl --fail -L -o "go-bulk-release-cli.jar" -H "Authorization: Bearer ${MAVEN_TOKEN}" "${url}"
           
           options=""
           if [ "${SKIP_TEST}" = "true" ]; then
