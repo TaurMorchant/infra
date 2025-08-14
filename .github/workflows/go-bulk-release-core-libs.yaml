@@ -54,7 +54,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: "main"
-          token: '${{ secrets.MAVEN_RELEASE_DEV_TOKEN }}'
           # todo vlla: зачем выкачивать этот репозиторий?
 
 #      - name: "Download GAVs from another release workflow(s)"
