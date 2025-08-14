@@ -134,6 +134,14 @@ jobs:
           gpg-private-key: ${{ inputs.maven-gpg-private-key }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
+      - name: Download go-bulk-release-cli jar
+        run: mvn org.apache.maven.plugins:maven-dependency-plugin:3.8.1:copy \
+          -Dartifact=org.qubership.cloud:go-bulk-release-cli:1.3.0-SNAPSHOT:jar:jar-with-dependencies \
+          -DremoteRepositories=github::default::https://maven.pkg.github.com/netcracker/qubership-core-bulk-release \
+          -DoutputDirectory=. \
+          -Dmdep.overWriteSnapshots=true \
+          -Dmdep.stripVersion=true
+
       - name: "Run go-bulk-release-cli"
         id: run-go-bulk-release-cli
         shell: bash
@@ -146,16 +154,6 @@ jobs:
         # language="shell script"
         run: |
           mkdir -p /tmp/GOPROXY
-          
-          # todo vlla почему maven-bulk-release-cli выкачивается из репозитория qubership-core-infra?
-          cliVersion="1.3.0-SNAPSHOT"
-          
-          mvn org.apache.maven.plugins:maven-dependency-plugin:3.8.1:copy \
-            -Dartifact=org.qubership.cloud:go-bulk-release-cli:${cliVersion}:jar:jar-with-dependencies \
-            -DremoteRepositories=github::default::https://maven.pkg.github.com/netcracker/qubership-core-bulk-release \
-            -DoutputDirectory=. \
-            -Dmdep.overWriteSnapshots=true \
-            -Dmdep.stripVersion=true
           
           options=""
           if [ "${SKIP_TEST}" = "true" ]; then
