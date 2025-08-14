@@ -137,7 +137,8 @@ jobs:
       - name: "Resolve go-bulk-release-cli JAR via Maven"
         shell: bash
         env:
-          MAVEN_TOKEN: ${{ secrets.MAVEN_RELEASE_DEV_TOKEN }}
+          MAVEN_USERNAME: MAVEN_USER
+          MAVEN_PASSWORD: MAVEN_TOKEN
         run: |
           CLI_VERSION="1.3.0-SNAPSHOT"
           
