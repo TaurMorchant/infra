@@ -141,7 +141,10 @@ jobs:
           fetch-depth: 1
 
       - name: "ls"
-        run: ls -la
+        run: |
+          pwd
+          ls -la
+          chmod +x gopack
 
       - name: "Run go-bulk-release-cli"
         id: run-go-bulk-release-cli
@@ -155,6 +158,9 @@ jobs:
         # language="shell script"
         run: |
           mkdir /tmp/GOPROXY
+          
+          pwd
+          ls -la
           
           # todo vlla почему maven-bulk-release-cli выкачивается из репозитория qubership-core-infra?
           cliVersion="1.2.4-SNAPSHOT"         
