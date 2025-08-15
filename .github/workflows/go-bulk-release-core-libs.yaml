@@ -136,11 +136,13 @@ jobs:
 
       - name: "Download go-pack tool"
         run: |
-          VER="1.0.0" 
+          VER="v1.0.0" 
           BASE="https://github.com/TaurMorchant/go-pack/releases/download/${VER}"
-          curl -L "$BASE/gopack" -o gopack
-          curl -L "$BASE/SHA256SUMS" -o SHA256SUMS
-          grep gopack SHA256SUMS | sha256sum -c -
+          curl -fL "$BASE/gopack" -o gopack
+          curl -f L "$BASE/SHA256SUMS" -o SHA256SUMS
+          
+          sha256sum -c --ignore-missing SHA256SUMS
+          
           chmod +x gopack
           echo "$(pwd)" >> $GITHUB_PATH
 
