@@ -135,7 +135,7 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: "Download go-pack tool"
-        run:
+        run: |
           VER="1.0.0" 
           BASE="https://github.com/TaurMorchant/go-pack/releases/download/${VER}"
           curl -L "$BASE/gopack" -o gopack
