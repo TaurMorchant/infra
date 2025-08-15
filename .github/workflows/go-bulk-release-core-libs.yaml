@@ -134,6 +134,15 @@ jobs:
           gpg-private-key: ${{ inputs.maven-gpg-private-key }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
+      - name: "Checkout go-pack util"
+        uses: actions/checkout@v4
+        with:
+          repository: taurmorchant/go-pack
+          fetch-depth: 1
+
+      - name: "ls"
+        run: ls -la
+
       - name: "Run go-bulk-release-cli"
         id: run-go-bulk-release-cli
         shell: bash
