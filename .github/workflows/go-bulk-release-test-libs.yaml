@@ -11,26 +11,8 @@ on:
         description: "Repository to bulk release from. Select 'all' to release all repositories"
         options:
           - all
-          - qubership-core-lib-go
-          - qubership-core-lib-go-actuator-common
-          - qubership-core-lib-go-bg-kafka
-          - qubership-core-lib-go-bg-state-monitor
-          - qubership-core-lib-go-dbaas-arangodb-client
-          - qubership-core-lib-go-dbaas-base-client
-          - qubership-core-lib-go-dbaas-cassandra-client
-          - qubership-core-lib-go-dbaas-clickhouse-client
-          - qubership-core-lib-go-dbaas-mongo-client
-          - qubership-core-lib-go-dbaas-opensearch-client
-          - qubership-core-lib-go-dbaas-postgres-client
-          - qubership-core-lib-go-error-handling
-          - qubership-core-lib-go-fiber-server-utils
-          - qubership-core-lib-go-maas-bg-segmentio
-          - qubership-core-lib-go-maas-client
-          - qubership-core-lib-go-maas-core
-          - qubership-core-lib-go-maas-segmentio
-          - qubership-core-lib-go-paas-mediation-client
-          - qubership-core-lib-go-rest-utils
-          - qubership-core-lib-go-stomp-websocket
+          - go-test-service-a
+          - go-test-service-b
       versionIncrementType:
         description: "Version part to increment"
         type: choice
@@ -125,26 +107,8 @@ jobs:
         # language="shell script"
         # todo vlla: вынести в конфигурацияонный файл и просто читать его? + оптимизировать под кейс добавления нового репозитория
         run: |
-          repositories="https://github.com/vlla-test-organization/qubership-core-lib-go
-          https://github.com/vlla-test-organization/qubership-core-lib-go-actuator-common
-          https://github.com/vlla-test-organization/qubership-core-lib-go-bg-kafka
-          https://github.com/vlla-test-organization/qubership-core-lib-go-bg-state-monitor
-          https://github.com/vlla-test-organization/qubership-core-lib-go-dbaas-arangodb-client
-          https://github.com/vlla-test-organization/qubership-core-lib-go-dbaas-base-client
-          https://github.com/vlla-test-organization/qubership-core-lib-go-dbaas-cassandra-client
-          https://github.com/vlla-test-organization/qubership-core-lib-go-dbaas-clickhouse-client
-          https://github.com/vlla-test-organization/qubership-core-lib-go-dbaas-mongo-client
-          https://github.com/vlla-test-organization/qubership-core-lib-go-dbaas-opensearch-client
-          https://github.com/vlla-test-organization/qubership-core-lib-go-dbaas-postgres-client
-          https://github.com/vlla-test-organization/qubership-core-lib-go-error-handling
-          https://github.com/vlla-test-organization/qubership-core-lib-go-fiber-server-utils
-          https://github.com/vlla-test-organization/qubership-core-lib-go-maas-bg-segmentio
-          https://github.com/vlla-test-organization/qubership-core-lib-go-maas-client
-          https://github.com/vlla-test-organization/qubership-core-lib-go-maas-core
-          https://github.com/vlla-test-organization/qubership-core-lib-go-maas-segmentio
-          https://github.com/vlla-test-organization/qubership-core-lib-go-paas-mediation-client
-          https://github.com/vlla-test-organization/qubership-core-lib-go-rest-utils
-          https://github.com/vlla-test-organization/qubership-core-lib-go-stomp-websocket"
+          repositories="https://github.com/taurmorchant/go-test-service-a
+          https://github.com/taurmorchant/go-test-service-b"
           echo "repositories=\n${repositories}"
           repositories=$(echo "${repositories}" | tr '\n' ',')
           echo "repositories=${repositories}" >> "${GITHUB_OUTPUT}"
@@ -200,7 +164,7 @@ jobs:
           
           # todo vlla почему maven-bulk-release-cli выкачивается из репозитория qubership-core-infra?
           cliVersion="1.2.4-SNAPSHOT"
-          snapshotVersion="1.3.0-20250815.124415-16"
+          snapshotVersion="1.3.0-20250815.081702-15"
           
           url="https://maven.pkg.github.com/netcracker/qubership-core-bulk-release/org/qubership/cloud/go-bulk-release-cli/1.3.0-SNAPSHOT/go-bulk-release-cli-${snapshotVersion}-jar-with-dependencies.jar"
           curl --fail -L -o "go-bulk-release-cli.jar" -H "Authorization: Bearer ${MAVEN_TOKEN}" "${url}"
@@ -216,7 +180,7 @@ jobs:
           if [ "${REPOSITORY_TO_RELEASE}" = "all" ]; then
             repositoryToRelease=""
           else 
-            repositoryToRelease="https://github.com/vlla-test-organization/${REPOSITORY_TO_RELEASE}"
+            repositoryToRelease="https://github.com/taurmorchant/${REPOSITORY_TO_RELEASE}"
           fi
           args="--baseDir=/tmp"
           args="${args} --gitURL=https://github.com"
