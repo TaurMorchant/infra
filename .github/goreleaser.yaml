@@ -6,7 +6,7 @@ builds:
 
 
 changelog:
-  use: git
+  use: github
   abbrev: -1
   sort: asc
   groups:
