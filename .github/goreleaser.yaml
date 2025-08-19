@@ -31,11 +31,7 @@ changelog:
 
 release:
   footer: >-
-
+    
     ---
     
-    .PreviousTag - {{ .PreviousTag }}
-    .GitURL - {{ .GitURL }}
-    .ProjectName - {{ .ProjectName }}
-    .ReleaseURL - {{ .ReleaseURL }}
-    
+    **Full Changelog**: [{{ if .PreviousTag }}{{ .PreviousTag }}...{{ .Tag }}{{ else }}{{ .Tag }}...HEAD{{ end }}]({{ .GitURL }}/compare/{{ if .PreviousTag }}{{ .PreviousTag }}...{{ .Tag }}{{ else }}{{ .Tag }}...HEAD{{ end }})
