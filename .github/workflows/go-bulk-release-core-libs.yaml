@@ -152,9 +152,7 @@ jobs:
       - name: "Set up java"
         uses: actions/setup-java@v4
         with:
-          java-version: |
-            17
-            21
+          java-version: 21
           architecture: 'x64'
           distribution: 'temurin'
           server-id: github
@@ -188,6 +186,7 @@ jobs:
         id: run-go-bulk-release-cli
         shell: bash
         env:
+          GITHUB_TOKEN: ${{ secrets.MAVEN_RELEASE_DEV_TOKEN }}
           REPOSITORIES: ${{ steps.read-repositories.outputs.repositories }}
           REPOSITORY_TO_RELEASE: ${{ inputs.repositoryToRelease }}
           VERSION_INCREMENT_TYPE: ${{ inputs.versionIncrementType }}
