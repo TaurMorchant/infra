@@ -3,29 +3,35 @@ version: 2
 builds:
   - skip: true
 
-release:
-  footer: >-
-    ---
-    **Full Changelog**: https://{{ .ModulePath }}/compare/{{ if .PreviousTag }}{{ .PreviousTag }}...{{ .Tag }}{{ else }}{{ .Tag }}...HEAD{{ end }}
-
 changelog:
   use: github
+  format: "{{ .SHA }}: {{ .Message }}{{ with .AuthorUsername }} (@{{ . }}){{ end }}"
   sort: asc
   groups:
-    - title: "Features"
-      regexp: '^.*?feat(\([[:word:].:-]+\))?!?:.+$'
-      order: 0
-    - title: "Fixes"
-      regexp: '^.*?fix(\([[:word:].:-]+\))?!?:.+$'
-      order: 1
-    - title: "Performance"
-      regexp: '^.*?perf(\([[:word:].:-]+\))?!?:.+$'
-      order: 2
-    - title: "Docs"
-      regexp: '^.*?docs(\([[:word:].:-]+\))?!?:.+$'
-      order: 3
-    - title: "Other"
-      order: 999
+    - title: "New Features"
+      regexp: '^.*?feat(\(.+\))??!?:.+$'
+      order: 100
+    - title: "Security updates"
+      regexp: '^.*?sec(\(.+\))??!?:.+$'
+      order: 150
+    - title: "Bug fixes"
+      regexp: '^.*?fix(\(.+\))??!?:.+$'
+      order: 200
+    - title: "Documentation updates"
+      regexp: '^.*?docs?(\(.+\))??!?:.+$'
+      order: 400
+    - title: "Refactoring"
+      regexp: '^.*?refactor(\(.+\))??!?:.+$'
+      order: 500
+    - title: Other work
+      order: 9999
   filters:
     exclude:
       - "(?i)^merge "
+
+release:
+  footer: >-
+    ---
+    
+    {{- $repo := .GitURL | replace "git@github.com:" "https://github.com/" | replace "ssh://[email protected]/" "https://github.com/" | trimsuffix ".git" -}}
+    **Full Changelog**: [{{ if .PreviousTag }}{{ .PreviousTag }}...{{ .Tag }}{{ else }}{{ .Tag }}...HEAD{{ end }}]({{ $repo }}/compare/{{ if .PreviousTag }}{{ .PreviousTag }}...{{ .Tag }}{{ else }}{{ .Tag }}...HEAD{{ end }})
