@@ -1,0 +1,18 @@
+version: 2
+
+before:
+
+builds:
+  - skip: true
+
+archives:
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+
+release:
+  footer: >-
