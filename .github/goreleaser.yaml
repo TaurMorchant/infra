@@ -28,9 +28,3 @@ changelog:
   filters:
     exclude:
       - "(?i)^merge "
-
-release:
-  footer: |
-    ---
-    {{- $repo := dir (dir (dir .ReleaseURL)) -}}
-    **Full Changelog**: [{{ if .PreviousTag }}{{ .PreviousTag }}...{{ .Tag }}{{ else }}{{ .Tag }}...HEAD{{ end }}]({{ $repo }}/compare/{{ if .PreviousTag }}{{ .PreviousTag }}...{{ .Tag }}{{ else }}{{ .Tag }}...HEAD{{ end }})
