@@ -30,8 +30,7 @@ changelog:
       - "(?i)^merge "
 
 release:
-  footer: >-
+  footer: |
     ---
-    
-    {{- $repo := .GitURL | replace "git@github.com:" "https://github.com/" | replace "ssh://[email protected]/" "https://github.com/" | trimsuffix ".git" -}}
+    {{- $repo := dir (dir (dir .ReleaseURL)) -}}
     **Full Changelog**: [{{ if .PreviousTag }}{{ .PreviousTag }}...{{ .Tag }}{{ else }}{{ .Tag }}...HEAD{{ end }}]({{ $repo }}/compare/{{ if .PreviousTag }}{{ .PreviousTag }}...{{ .Tag }}{{ else }}{{ .Tag }}...HEAD{{ end }})
