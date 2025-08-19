@@ -3,11 +3,13 @@ version: 2
 builds:
   - skip: true
 
-
+release:
+  footer: >-
+    ---
+    **Full Changelog**: https://{{ .ModulePath }}/compare/{{ if .PreviousTag }}{{ .PreviousTag }}...{{ .Tag }}{{ else }}{{ .Tag }}...HEAD{{ end }}
 
 changelog:
   use: github
-  abbrev: -1
   sort: asc
   groups:
     - title: "Features"
