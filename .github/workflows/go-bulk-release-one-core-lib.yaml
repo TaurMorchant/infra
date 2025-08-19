@@ -144,13 +144,22 @@ jobs:
           chmod +x gopack
           echo "$(pwd)" >> $GITHUB_PATH
 
-      - name: "Install GoReleaser "
+#      - name: "Install GoReleaser "
+#        run: |
+#          echo 'deb [trusted=yes] https://repo.goreleaser.com/apt/ /' | sudo tee /etc/apt/sources.list.d/goreleaser.list
+#          sudo apt update
+#          sudo apt install goreleaser
+#          goreleaser -v
+#          cp ./.github/goreleaser.yaml /tmp/
+
+      - name: Install GoReleaser (.deb)
+        env:
+          GORELEASER_VERSION: "2.11.2"
         run: |
-          echo 'deb [trusted=yes] https://repo.goreleaser.com/apt/ /' | sudo tee /etc/apt/sources.list.d/goreleaser.list
-          sudo apt update
-          sudo apt install goreleaser
+          curl -fsSL -o goreleaser.deb \
+            "https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/goreleaser_${GORELEASER_VERSION}_amd64.deb"
+          sudo dpkg -i goreleaser.deb
           goreleaser -v
-          cp ./.github/goreleaser.yaml /tmp/
 
       - name: "Run go-bulk-release-cli"
         id: run-go-bulk-release-cli
