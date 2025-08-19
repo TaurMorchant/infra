@@ -149,13 +149,6 @@ jobs:
           repositories=$(echo "${repositories}" | tr '\n' ',')
           echo "repositories=${repositories}" >> "${GITHUB_OUTPUT}"
 
-#      - name: "Cache Maven dependencies"
-#        uses: actions/cache@v4
-#        with:
-#          path: ~/.m2/repository
-#          key: ${{ runner.os }}-maven-${{ github.run_id }}
-#          restore-keys: ${{ runner.os }}-maven-
-
       - name: "Set up java"
         uses: actions/setup-java@v4
         with:
@@ -182,6 +175,15 @@ jobs:
           chmod +x gopack
           echo "$(pwd)" >> $GITHUB_PATH
 
+      - name: "Install GoReleaser"
+        env:
+          GORELEASER_VERSION: "2.11.2"
+        run: |
+          curl -fsSL -o goreleaser.deb \
+            "https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/goreleaser_${GORELEASER_VERSION}_amd64.deb"
+          sudo dpkg -i goreleaser.deb
+          goreleaser -v
+
       - name: "Run go-bulk-release-cli"
         id: run-go-bulk-release-cli
         shell: bash
@@ -194,13 +196,11 @@ jobs:
         # language="shell script"
         run: |
           mkdir /tmp/GOPROXY
-          
-          pwd
-          ls -la
+          cp ./.github/goreleaser.yaml /tmp/
           
           # todo vlla почему maven-bulk-release-cli выкачивается из репозитория qubership-core-infra?
           cliVersion="1.2.4-SNAPSHOT"
-          snapshotVersion="1.3.0-20250818.073356-25"
+          snapshotVersion="1.3.0-20250819.122241-29"
           
           url="https://maven.pkg.github.com/netcracker/qubership-core-bulk-release/org/qubership/cloud/go-bulk-release-cli/1.3.0-SNAPSHOT/go-bulk-release-cli-${snapshotVersion}-jar-with-dependencies.jar"
           curl --fail -L -o "go-bulk-release-cli.jar" -H "Authorization: Bearer ${MAVEN_TOKEN}" "${url}"
@@ -219,6 +219,7 @@ jobs:
             repositoryToRelease="https://github.com/vlla-test-organization/${REPOSITORY_TO_RELEASE}"
           fi
           args="--baseDir=/tmp"
+          args="${args} --goProxyDir=/tmp/GOPROXY"
           args="${args} --gitURL=https://github.com"
           args="${args} --gitUsername=actions"
           args="${args} --gitEmail=actions@github.com"
