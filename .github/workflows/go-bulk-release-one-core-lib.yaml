@@ -1,6 +1,6 @@
 # $schema: https://raw.githubusercontent.com/SchemaStore/schemastore/refs/heads/master/src/schemas/json/github-workflow.json
 
-name: "Go bulk release of core libs"
+name: "Go bulk release ONE core lib"
 run-name: Go bulk release of core-libs [${{ inputs.repositoryToRelease }}] by @${{ github.actor }}'
 
 on:
