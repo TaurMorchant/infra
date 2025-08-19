@@ -3,9 +3,27 @@ version: 2
 builds:
   - skip: true
 
-source:
-  enabled: true
-  format: zip
+
 
 changelog:
-  use: github-native
+  use: git
+  abbrev: -1
+  sort: asc
+  groups:
+    - title: "Features"
+      regexp: '^.*?feat(\([[:word:].:-]+\))?!?:.+$'
+      order: 0
+    - title: "Fixes"
+      regexp: '^.*?fix(\([[:word:].:-]+\))?!?:.+$'
+      order: 1
+    - title: "Performance"
+      regexp: '^.*?perf(\([[:word:].:-]+\))?!?:.+$'
+      order: 2
+    - title: "Docs"
+      regexp: '^.*?docs(\([[:word:].:-]+\))?!?:.+$'
+      order: 3
+    - title: "Other"
+      order: 999
+  filters:
+    exclude:
+      - "(?i)^merge "
