@@ -28,3 +28,14 @@ changelog:
   filters:
     exclude:
       - "(?i)^merge "
+
+release:
+  footer: >-
+
+    ---
+    
+    .PreviousTag - {{ .PreviousTag }}
+    .GitURL - {{ .GitURL }}
+    .ProjectName - {{ .ProjectName }}
+    .ReleaseURL - {{ .ReleaseURL }}
+    
