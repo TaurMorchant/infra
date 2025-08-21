@@ -131,7 +131,7 @@ jobs:
 
       - name: "Install gomajor"
         run: |
-          go install github.com/taurmorchant/gomajor@v0.15.1
+          go install github.com/taurmorchant/gomajor@v0.15.2
           which gomajor
           gomajor -h
 
