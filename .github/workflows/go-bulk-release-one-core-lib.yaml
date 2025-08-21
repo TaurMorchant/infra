@@ -12,6 +12,7 @@ on:
         options:
           - all
           - qubership-core-lib-go
+          - qubership-core-lib-go-actuator-common
       versionIncrementType:
         description: "Version part to increment"
         type: choice
@@ -105,7 +106,8 @@ jobs:
         # language="shell script"
         # todo vlla: вынести в конфигурацияонный файл и просто читать его? + оптимизировать под кейс добавления нового репозитория
         run: |
-          repositories="https://github.com/vlla-test-organization/qubership-core-lib-go"
+          repositories="https://github.com/vlla-test-organization/qubership-core-lib-go
+          https://github.com/vlla-test-organization/qubership-core-lib-go-actuator-common"
           echo "repositories=\n${repositories}"
           repositories=$(echo "${repositories}" | tr '\n' ',')
           echo "repositories=${repositories}" >> "${GITHUB_OUTPUT}"
