@@ -149,7 +149,9 @@ jobs:
         env:
           GORELEASER_VERSION: "2.11.2"
         run: |
-          go install github.com/goreleaser/goreleaser@v${GORELEASER_VERSION}
+          curl -fsSL -o goreleaser.deb \
+            "https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/goreleaser_${GORELEASER_VERSION}_amd64.deb"
+          sudo dpkg -i goreleaser.deb
           goreleaser -v
 
       - name: "Run go-bulk-release-cli"
