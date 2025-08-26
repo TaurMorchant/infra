@@ -161,11 +161,9 @@ jobs:
         run: |
           mkdir /tmp/GOPROXY
           
-          env -u GITHUB_ACTIONS -u GITHUB_SHA -u GITHUB_REF -u CI
-          
           # todo vlla почему maven-bulk-release-cli выкачивается из репозитория qubership-core-infra?
           cliVersion="1.2.4-SNAPSHOT"
-          snapshotVersion="1.3.0-20250826.094618-58"
+          snapshotVersion="1.3.0-20250826.101858-59"
           
           url="https://maven.pkg.github.com/netcracker/qubership-core-bulk-release/org/qubership/cloud/go-bulk-release-cli/1.3.0-SNAPSHOT/go-bulk-release-cli-${snapshotVersion}-jar-with-dependencies.jar"
           curl --fail -L -o "go-bulk-release-cli.jar" -H "Authorization: Bearer ${MAVEN_TOKEN}" "${url}"
