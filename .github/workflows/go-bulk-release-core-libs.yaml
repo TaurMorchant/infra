@@ -159,7 +159,7 @@ jobs:
 
       - name: "Install gomajor"
         run: |
-          go install github.com/taurmorchant/gomajor@v0.15.3
+          go install github.com/taurmorchant/gomajor@v0.15.4
           gomajor -h
 
       - name: "Download go-pack tool"
