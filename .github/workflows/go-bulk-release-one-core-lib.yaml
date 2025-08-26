@@ -13,14 +13,6 @@ on:
           - all
           - qubership-core-lib-go
           - qubership-core-lib-go-actuator-common
-      versionIncrementType:
-        description: "Version part to increment"
-        type: choice
-        options:
-          - patch
-          - minor
-          - major
-        default: patch
       skipTest:
         description: "skip tests"
         type: boolean
@@ -163,7 +155,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.MAVEN_RELEASE_DEV_TOKEN }}
           REPOSITORIES: ${{ steps.read-repositories.outputs.repositories }}
           REPOSITORY_TO_RELEASE: ${{ inputs.repositoryToRelease }}
-          VERSION_INCREMENT_TYPE: ${{ inputs.versionIncrementType }}
           SKIP_TEST: ${{ inputs.skipTest }}
           DRY_RUN: ${{ inputs.dryRun }}
         # language="shell script"
@@ -198,7 +189,6 @@ jobs:
           args="${args} --gitPassword=${MAVEN_TOKEN}"
           args="${args} --repositories=${REPOSITORIES}"
           args="${args} --repositoriesToReleaseFrom=${repositoryToRelease}"
-          args="${args} --versionIncrementType=${VERSION_INCREMENT_TYPE}"
           args="${args} --resultOutputFile=${GITHUB_OUTPUT}"
           args="${args} --summaryFile=${GITHUB_STEP_SUMMARY}"
           args="${args} --gavsResultFile=/tmp/gavs.txt"
