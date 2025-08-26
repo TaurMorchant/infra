@@ -129,7 +129,7 @@ jobs:
 
       - name: "Download go-pack tool"
         run: |
-          go install github.com/taurmorchant/go-pack@v1.1.2
+          go install github.com/taurmorchant/go-pack@v1.1.1
           which go-pack
 
 #      - name: "Install GoReleaser"
