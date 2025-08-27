@@ -132,18 +132,9 @@ jobs:
           go install github.com/taurmorchant/go-pack@v1.1.4
           which go-pack
 
-#      - name: "Install GoReleaser"
-#        env:
-#          GORELEASER_VERSION: "2.11.2"
-#        run: |
-#          curl -fsSL -o goreleaser.deb \
-#            "https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/goreleaser_${GORELEASER_VERSION}_amd64.deb"
-#          sudo dpkg -i goreleaser.deb
-#          goreleaser -v
-
       - name: Install go-semantic-release
         run: |
-          curl -SL https://get-release.xyz/semantic-release/linux/amd64 -o ./semantic-release
+          curl -SL https://github.com/go-semantic-release/semantic-release/releases/download/v2.31.0/semantic-release_v2.31.0_linux_amd64 -o ./semantic-release
           chmod +x ./semantic-release
           sudo mv semantic-release /usr/local/bin/semantic-release
           semantic-release --version
